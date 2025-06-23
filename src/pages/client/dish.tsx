@@ -1,6 +1,8 @@
+import DishBanner from "../../components/Dish/DishBanner";
+
 const DishPage = () => {
     return (
-        <div>dish page</div>
+        <DishBanner />
     )
 }
 

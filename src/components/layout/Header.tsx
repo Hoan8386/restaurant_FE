@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     PhoneOutlined,
@@ -8,7 +8,7 @@ import {
     MenuOutlined,
 } from '@ant-design/icons';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Navbar */}
-            <nav className="mt-4 nav border-bottom border-white border-opacity-25 py-2">
+            <nav className=" nav border-bottom border-white border-opacity-25 py-2" style={{ marginTop: "35px" }}>
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-2">
@@ -49,15 +49,15 @@ const Navbar: React.FC = () => {
                         <div className="col-10 d-flex justify-content-end align-items-center">
                             {/* Desktop menu */}
                             <div className="d-none d-md-block">
-                                <ul className="list-unstyled d-flex mb-0 gap-3">
-                                    <li><Link className="text-white text-decoration-none" to="/">Home</Link></li>
-                                    <li><Link className="text-white text-decoration-none" to="/about">About</Link></li>
-                                    <li><Link className="text-white text-decoration-none" to="/dish">Dish</Link></li>
-                                    <li><Link className="btn btn-outline-light btn-sm" to="/book">Book a table</Link></li>
-                                    <li><Link className="text-white text-decoration-none" to="/login">Login</Link></li>
+                                <ul className="d-flex mb-0 gap-3">
+                                    <li className=" px-2 "><NavLink className="nav_link text-white text-decoration-none px-2" to="/">Home</NavLink></li>
+                                    <li className=" px-2 "><NavLink className="nav_link text-white text-decoration-none px-2" to="/about">About</NavLink ></li>
+                                    <li className=" px-2 "><NavLink className="nav_link text-white text-decoration-none px-2" to="/dish">Dish</NavLink ></li>
+                                    <li className=" px-2 "><NavLink className="  btn btn-outline-light btn-sm px-2" to="/book">Book a table</NavLink ></li>
+                                    <li className=" px-2 "><NavLink className="nav_link text-white text-decoration-none px-2" to="/login">Login</NavLink ></li>
                                     <li className="position-relative">
-                                        <ShoppingCartOutlined style={{ fontSize: 20, color: 'white' }} />
-                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        <ShoppingCartOutlined style={{ fontSize: 30, color: 'white' }} />
+                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill icon_cart">
                                             0
                                         </span>
                                     </li>
@@ -75,13 +75,13 @@ const Navbar: React.FC = () => {
                         {mobileMenuOpen && (
                             <div className="col-12 mt-3 d-md-none">
                                 <ul className="list-unstyled text-center">
-                                    <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
-                                    <li><Link to="/about" onClick={() => setMobileMenuOpen(false)}>About</Link></li>
-                                    <li><Link to="/menu" onClick={() => setMobileMenuOpen(false)}>Menu</Link></li>
-                                    <li><Link to="/stories" onClick={() => setMobileMenuOpen(false)}>Stories</Link></li>
-                                    <li><Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link></li>
-                                    <li><Link to="/book" onClick={() => setMobileMenuOpen(false)}>Book a table</Link></li>
-                                    <li><Link to="/account/login" onClick={() => setMobileMenuOpen(false)}>Login</Link></li>
+                                    <li className="px-2"><NavLink to="/" onClick={() => setMobileMenuOpen(false)}>Home</NavLink ></li>
+                                    <li className="px-2"><NavLink to="/about" onClick={() => setMobileMenuOpen(false)}>About</NavLink ></li>
+                                    <li className="px-2"><NavLink to="/menu" onClick={() => setMobileMenuOpen(false)}>Menu</NavLink ></li>
+                                    <li className="px-2"><NavLink to="/stories" onClick={() => setMobileMenuOpen(false)}>Stories</NavLink ></li>
+                                    <li className="px-2"><NavLink to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</NavLink ></li>
+                                    <li className="px-2"><NavLink to="/book" onClick={() => setMobileMenuOpen(false)}>Book a table</NavLink ></li>
+                                    <li className="px-2"><NavLink to="/account/login" onClick={() => setMobileMenuOpen(false)}>Login</NavLink ></li>
                                     <li className="d-flex justify-content-center align-items-center gap-2">
                                         <ShoppingCartOutlined style={{ fontSize: 20 }} />
                                         <span className="badge bg-danger">0</span>

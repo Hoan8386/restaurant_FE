@@ -139,6 +139,10 @@ nav {
     color: #fff;
 }
 
+.active {
+    color: var(--primary-color) !important;
+}
+
 .nav__item--active a {
     color: var(--primary-color) !important;
     transition: 0.3s;
@@ -159,6 +163,7 @@ li:hover {
     cursor: pointer;
 }
 
+
 .button {
     color: var(--white-color) !important;
     background-color: var(--primary-color);
@@ -166,7 +171,7 @@ li:hover {
 }
 
 .button a:hover {
-    color: #fff !important;
+    color: #000 !important;
 }
 
 .slide {
@@ -736,4 +741,10 @@ body .chef__position text {
 .delete:hover {
     background: #fff;
     color: var(--primary-color);
+}
+
+
+/*  */
+.icon_cart {
+    background-color: var(--primary-color);
 }
