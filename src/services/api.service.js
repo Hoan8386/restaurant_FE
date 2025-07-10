@@ -162,10 +162,16 @@ const checkOutCart = (receiverName, receiverPhone, receiverAddress, receiverEmai
 }
 
 
+const fetchAllOrder = () => {
+    const URL_BACKEND = "/orders/my";
+    return axios.get(URL_BACKEND)
+}
+
+
 export {
     createUserApi, fetchAllUserAPI, updateUserApi,
     deleteUserAPI, handleUploadFile, updateUserAvatarApi,
     registerUserApi, loginApi, getAccountAPI, logoutAPI,
     fetchAllCategory, fetchAllDish, adDishInCart, getCart, getAllDishInCart,
-    updateQuantity, deleteDish, checkOutCart
+    updateQuantity, deleteDish, checkOutCart, fetchAllOrder
 } 

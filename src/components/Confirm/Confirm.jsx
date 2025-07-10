@@ -204,21 +204,25 @@ const ConfirmPage = () => {
             {/* Modal Cảm Ơn */}
             {
                 showModal && (
-                    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-                        <div className="bg-white rounded-lg shadow-lg w-[1000px] h-[710px] p-8 relative animate-fadeIn">
+                    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 ">
+                        <div className="bg-white rounded-lg shadow-lg w-[1000px] h-[710px] p-8 relative animate-fadeIn p-5">
                             <button onClick={() => setShowModal(false)} className="absolute right-8 text-xl text-black">
                                 <i className="fa-solid fa-xmark"></i>
                             </button>
                             <div className="text-center text-[#C8A97E] text-6xl font-[Great_Vibes,cursive]">Feliciano</div>
                             <p className="mt-8 text-2xl font-[Great_Vibes,cursive]">
-                                Kính gửi Quý khách hàng thân mến: <strong>Nguyễn Thành Hoàn</strong>
+                                Kính gửi Quý khách hàng thân mến: <strong>{user.username}</strong>
                             </p>
-                            <p className="mt-4 text-xl font-[Great_Vibes,cursive]">
-                                Chúng tôi xin chân thành gửi lời cảm ơn sâu sắc... <br />
-                                (Phần này giữ nguyên nội dung như bản HTML gốc)
+                            <p className="mt-4 text-xl font-[Great_Vibes,cursive] leading-relaxed">
+                                Chúng tôi xin gửi đến Quý khách hàng lời cảm ơn chân thành và sâu sắc nhất vì đã tin tưởng và lựa chọn các món ăn tại cửa hàng của chúng tôi trong thời gian vừa qua. <br /><br />
+                                Mỗi đơn hàng được gửi đi không chỉ là một phần ăn ngon mà còn là cả tấm lòng và sự tận tâm của toàn thể đội ngũ chúng tôi. Chúng tôi luôn nỗ lực từng ngày để mang đến những món ăn chất lượng, an toàn và mang đậm hương vị đặc trưng – như một lời tri ân gửi đến Quý khách vì đã đồng hành cùng chúng tôi.
+                                Sự ủng hộ và những phản hồi tích cực từ Quý khách chính là động lực lớn lao giúp chúng tôi không ngừng hoàn thiện và phát triển hơn nữa. Chúng tôi luôn mong muốn mang đến cho Quý khách những trải nghiệm ẩm thực tuyệt vời nhất – không chỉ ngon miệng mà còn trọn vẹn về cảm xúc.
+                                Một lần nữa, xin cảm ơn Quý khách vì đã tin yêu và lựa chọn cửa hàng chúng tôi giữa rất nhiều sự lựa chọn ngoài kia. Chúng tôi rất mong sẽ tiếp tục được đón tiếp và phục vụ Quý khách trong những lần ghé thăm tiếp theo.
+                                Trân trọng và biết ơn!
                             </p>
-                            <p className="text-right mt-8 mr-10 text-xl font-[Great_Vibes,cursive]">Ký Tên</p>
-                            <p className="text-right mr-10 text-xl font-[Great_Vibes,cursive] font-bold">Trịnh Trần Phương Tuấn</p>
+
+                            <p className="text-right  mt-8  text-xl font-[Great_Vibes,cursive]">Ký Tên</p>
+                            <p className="text-right text-xl font-[Great_Vibes,cursive] font-bold">Nguyễn Thành Hoàn</p>
                         </div>
                     </div>
                 )

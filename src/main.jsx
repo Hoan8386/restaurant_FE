@@ -24,6 +24,7 @@ import 'antd/dist/reset.css';
 import { AuthWrapper } from './components/context/auth.context';
 import { InfoPage } from './components/info/info';
 import ConfirmPage from './components/Confirm/Confirm';
+import OrderPage from './pages/client/order';
 
 
 const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/info",
         element: <InfoPage />,
+      },
+      {
+        path: "/order",
+        element: <OrderPage />,
       },
 
     ]

@@ -61,7 +61,7 @@ const Navbar = () => {
         {
             key: '3',
             label: (
-                <NavLink to="/info" style={{ textDecoration: "none" }} >
+                <NavLink to="/order" style={{ textDecoration: "none" }} >
                     Order
                 </NavLink>
             ),
@@ -257,6 +257,7 @@ const Navbar = () => {
 
                 <ul className="shopping__list">
                     {/* item in cart */}
+
                     {listItemCart.map((item) => (
                         <div className="cart_item" key={item.id}>
                             <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'space-between' }}>
