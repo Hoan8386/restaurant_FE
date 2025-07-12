@@ -1,11 +1,11 @@
 import { Avatar, Button, Input, message, Select, Upload } from 'antd';
 import { LockOutlined, MailOutlined, UserOutlined, PhoneOutlined, HomeOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
-import bg1 from '../../assets/img/bg_1.jpg.webp'; // vẫn giữ hình nền
+import bg1 from '../../../assets/img/bg_1.jpg.webp'; // vẫn giữ hình nền
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../context/auth.context';
-import { updateUserApi } from '../../services/api.service';
-import Notification from '../noti/Notification';
+import { AuthContext } from '../../context/auth.context';
+import { updateUserApi } from '../../../services/api.service';
+import Notification from '../../noti/Notification';
 
 const { Option } = Select;
 

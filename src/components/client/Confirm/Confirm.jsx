@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import bg1 from '../../assets/img/bg_1.jpg.webp';
-import bg2 from '../../assets/img/bg_2.jpg.webp';
-import bg3 from '../../assets/img/bg_3.jpg.webp';
-import food1 from '../../assets/img/food-1.webp';
-import { AuthContext } from "../context/auth.context";
-import { checkOutCart, getAllDishInCart, getCart } from "../../services/api.service";
-import Notification from "../noti/Notification";
+import bg3 from '../../../assets/img/bg_3.jpg.webp';
+import food1 from '../../../assets/img/food-1.webp';
+import { AuthContext } from "../../context/auth.context";
+import { checkOutCart, getAllDishInCart, getCart } from "../../../services/api.service";
+import Notification from "../../noti/Notification";
 import { useNavigate } from "react-router-dom";
 const ConfirmPage = () => {
     const [cityData, setCityData] = useState([]);

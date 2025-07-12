@@ -22,10 +22,11 @@ import './style/login.css'
 import LoginPage from './pages/client/login';
 import 'antd/dist/reset.css';
 import { AuthWrapper } from './components/context/auth.context';
-import { InfoPage } from './components/info/info';
-import ConfirmPage from './components/Confirm/Confirm';
+import { InfoPage } from './components/client/info/info';
+import ConfirmPage from './components/client/Confirm/Confirm';
 import OrderPage from './pages/client/order';
-
+import PrivateRoute from './share/private.route';
+import LayoutAdmin from './pages/admin/Layout.admin';
 
 const router = createBrowserRouter([
   {
@@ -53,7 +54,10 @@ const router = createBrowserRouter([
         path: "/order",
         element: <OrderPage />,
       },
-
+      {
+        path: "/dashboard",
+        element: <PrivateRoute> <LayoutAdmin /> </PrivateRoute>
+      },
     ]
   }
   // sử dụng children để những th con có thể kế thừa layout của thằng cha và dùng <Outlet/> trong thằng 
@@ -72,6 +76,7 @@ const router = createBrowserRouter([
     path: "/confirm",
     element: <ConfirmPage />,
   },
+
 ]);
 
 

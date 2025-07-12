@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import bg3 from '../../assets/img/bg_3.jpg.webp';
+import bg3 from '../../../assets/img/bg_3.jpg.webp';
 const AboutBanner = () => {
   useEffect(() => {
     const nav = document.querySelector('nav');

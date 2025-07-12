@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import bg1 from '../../assets/img/bg_1.jpg.webp';
-import bg2 from '../../assets/img/bg_2.jpg.webp';
-import bg3 from '../../assets/img/bg_3.jpg.webp';
-import intro1 from '../../assets/img/intro1.webp';
-import intro2 from '../../assets/img/intro2.webp';
-import intro3 from '../../assets/img/intro3.webp';
-import intro4 from '../../assets/img/intro4.webp';
+import bg1 from '../../../assets/img/bg_1.jpg.webp';
+import bg2 from '../../../assets/img/bg_2.jpg.webp';
+import bg3 from '../../../assets/img/bg_3.jpg.webp';
+import intro1 from '../../../assets/img/intro1.webp';
+import intro2 from '../../../assets/img/intro2.webp';
+import intro3 from '../../../assets/img/intro3.webp';
+import intro4 from '../../../assets/img/intro4.webp';
 
 const IntroSection = () => {
     useEffect(() => {

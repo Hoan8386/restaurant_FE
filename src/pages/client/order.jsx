@@ -1,5 +1,5 @@
-import ListOrder from "../../components/Order/ListOrder";
-import OrderBanner from "../../components/Order/OrderBanner";
+import ListOrder from "../../components/client/Order/ListOrder";
+import OrderBanner from "../../components/client/Order/OrderBanner";
 const OrderPage = () => {
     return (
         <>

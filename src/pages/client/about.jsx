@@ -1,4 +1,4 @@
-import AboutBanner from "../../components/About/AboutBanner";
+import AboutBanner from "../../components/client/About/AboutBanner";
 
 const AboutPage = () => {
     return (

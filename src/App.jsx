@@ -7,7 +7,7 @@ import { getAccountAPI, getCart } from './services/api.service';
 import { Spin } from 'antd';
 
 const App = () => {
-  const { setUser, isAppLoading, setIsAppLoading, setCart, cart } = useContext(AuthContext);
+  const { user, setUser, isAppLoading, setIsAppLoading, setCart, cart } = useContext(AuthContext);
 
   useEffect(() => {
     fetchUserInfo();
@@ -29,7 +29,6 @@ const App = () => {
       setCart(res.data)
     }
   }
-
   return (
     <>
       {isAppLoading === true ?

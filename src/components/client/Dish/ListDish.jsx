@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import food1 from '../../assets/img/food-1.webp';
+import food1 from '../../../assets/img/food-1.webp';
 import { Pagination, Modal } from 'antd';
-import { adDishInCart, getCart } from '../../services/api.service';
-import Notification from '../noti/Notification';
-import { AuthContext } from '../context/auth.context';
+import { adDishInCart, getCart } from '../../../services/api.service';
+import Notification from '../../noti/Notification';
+import { AuthContext } from '../../context/auth.context';
 
 export const ListDish = ({ dishes, total, setPage, page }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);

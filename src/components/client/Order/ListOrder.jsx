@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAllOrder } from "../../services/api.service";
+import { fetchAllOrder } from "../../../services/api.service";
 
 const ListOrder = () => {
     const [orders, setOrders] = useState([]);
@@ -25,6 +25,14 @@ const ListOrder = () => {
                             {/* Cột trái */}
                             <div className="space-y-2">
                                 <p><span className="text-[#C8A97E] font-semibold">Mã đơn hàng:</span> {item.id}</p>
+                                <p>
+                                    <span className="text-[#C8A97E] font-semibold">Thời gian đặt:</span>{" "}
+                                    {new Date(item.date).toLocaleString("vi-VN", {
+                                        hour12: false,
+                                        timeZone: "Asia/Ho_Chi_Minh"
+                                    })}
+                                </p>
+
                                 <p><span className="text-[#C8A97E] font-semibold">Người nhận:</span> {item.receiverName}</p>
                                 <p><span className="text-[#C8A97E] font-semibold">Số điện thoại:</span> {item.receiverPhone}</p>
                                 <p><span className="text-[#C8A97E] font-semibold">Địa chỉ:</span> {item.receiverAddress}</p>

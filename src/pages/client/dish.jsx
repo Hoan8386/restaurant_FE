@@ -1,7 +1,7 @@
 import { use, useEffect, useState } from "react";
-import Category from "../../components/Dish/Category";
-import DishBanner from "../../components/Dish/DishBanner";
-import { ListDish } from "../../components/Dish/ListDish";
+import Category from "../../components/client/Dish/Category";
+import DishBanner from "../../components/client/Dish/DishBanner";
+import { ListDish } from "../../components/client/Dish/ListDish";
 import { fetchAllCategory, fetchAllDish } from "../../services/api.service";
 
 const DishPage = () => {

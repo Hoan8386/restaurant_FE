@@ -1,8 +1,9 @@
-import { useEffect } from "react";
-import bg3 from '../../assets/img/bg_3.jpg.webp';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import bg2 from '../../../assets/img/bg_2.jpg.webp';
+import { useEffect, useState } from 'react';
 
-const OrderBanner = () => {
+const DishBanner = () => {
+
     useEffect(() => {
         const nav = document.querySelector('nav');
         const sections = document.querySelectorAll('section');
@@ -27,25 +28,27 @@ const OrderBanner = () => {
         document.addEventListener('scroll', handleScroll);
         return () => document.removeEventListener('scroll', handleScroll);
     }, []);
+
+
     return (
         <div>
-            {/* Banner */}
+            {/* Banner background */}
             <div
                 style={{
-                    backgroundImage: `url(${bg3})`,
+                    backgroundImage: `url(${bg2})`,
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                     width: '100%',
-                    height: '40vh',
+                    height: '60vh',
                     filter: 'brightness(0.3)',
                 }}
             ></div>
+
+            {/* Title over banner */}
             <div className="slide__title showtotop">Delicious Specialties</div>
 
-            {/* Name Brand */}
-            <section className="name__brand" style={{
-                top: "25%"
-            }}>
+            {/* Name Brand Section */}
+            <section className="name__brand">
                 <div
                     className="showtotop"
                     style={{
@@ -55,7 +58,7 @@ const OrderBanner = () => {
                         background: 'transparent',
                     }}
                 >
-                    Your Order
+                    Specialties
                 </div>
                 <ul className="breadcrumb">
                     <li className="breadcrumb__item">
@@ -63,11 +66,14 @@ const OrderBanner = () => {
                         <i className="fa-solid fa-chevron-right"></i>
                     </li>
                     <li className="breadcrumb__item">
-                        ORDER <i className="fa-solid fa-chevron-right"></i>
+                        MENU <i className="fa-solid fa-chevron-right"></i>
                     </li>
                 </ul>
             </section>
+
+
         </div>
     );
-}
-export default OrderBanner
+};
+
+export default DishBanner;
