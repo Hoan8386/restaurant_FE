@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchAllOrder } from "../../../services/api.service";
+import { fetchMyOrder } from "../../../services/api.service";
 
 const ListOrder = () => {
     const [orders, setOrders] = useState([]);
     const fetchOrder = async () => {
-        const res = await fetchAllOrder();
+        const res = await fetchMyOrder();
         if (res.data) {
             setOrders(res.data)
         }

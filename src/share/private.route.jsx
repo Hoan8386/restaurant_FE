@@ -7,11 +7,13 @@ const PrivateRoute = (props) => {
     const { user } = useContext(AuthContext);
 
     if (user && user.id && user.role === "SUPER_ADMIN") {
+        console.log("check permission")
         return (
             <>
                 {props.children}
             </>)
     }
+    console.log("check permission 2")
 
     // return (<Navigate to="/login" replace />);
 

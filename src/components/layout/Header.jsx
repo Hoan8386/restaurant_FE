@@ -12,7 +12,7 @@ import { AuthContext } from '../context/auth.context';
 import { Drawer, Dropdown, message } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { Space } from 'antd';
-import { deleteDish, getAllDishInCart, getCart, logoutAPI, updateQuantity } from '../../services/api.service';
+import { deleteDishInCart, getAllDishInCart, getCart, logoutAPI, updateQuantity } from '../../services/api.service';
 import Notification from '../noti/Notification';
 import food1 from '../../assets/img/food-1.webp';
 
@@ -109,7 +109,7 @@ const Navbar = () => {
 
     const handleDeleteItem = async (id) => {
         debugger
-        const res = await deleteDish(id);
+        const res = await deleteDishInCart(id);
         if (res.data) {
             fetchCart();
         }
@@ -179,7 +179,7 @@ const Navbar = () => {
                                                         width: "150px",
                                                         top: "100px",
                                                         textDecoration: "none",
-
+                                                        zIndex: "9999"
                                                     }}>
                                                     <a onClick={e => e.preventDefault()}
                                                         style={{

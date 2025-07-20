@@ -53,14 +53,11 @@ const LoginPage = () => {
             if (res.data) {
 
                 addNotification("Login success", "Đăng nhập thành công", "success");
-                console.log("check acc", res.data.access_token)
                 localStorage.setItem("access_token", res.data.access_token)
                 setUser(res.data.user)
                 setTimeout(() => {
                     navigate("/");
                 }, 2000);
-
-
             } else if (res.statusCode === 400) {
                 addNotification("Error login user", "Thông tin đăng nhập không chính xác", "error");
                 return;

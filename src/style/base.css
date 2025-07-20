@@ -754,9 +754,8 @@ body .chef__position text {
 }
 
 
-.ant-drawer-close {
+/* .ant-drawer-close {
     color: #fff !important;
-    /* màu trắng */
     position: absolute;
     top: 16px;
     right: 16px;
@@ -768,15 +767,16 @@ body .chef__position text {
     background-color: transparent !important;
     transition: 0.5s;
     overflow: hidden;
-}
+} */
 
 /* Ghi đè animation mở Drawer */
+/* 
 .ant-drawer-content-wrapper {
     background-color: transparent !important;
     transition-duration: 0.5s !important;
-    /* 1 giây */
-}
+} */
 
+/* 
 .ant-modal-content {
     padding: 0 !important;
     overflow: hidden;
@@ -790,4 +790,4 @@ body .chef__position text {
 
 .ant-modal-body .row {
     height: 100% !important;
-}
+} */

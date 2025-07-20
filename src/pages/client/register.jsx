@@ -15,9 +15,9 @@ const RegisterPage = () => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setPasswordConfirmError] = useState('');
+    const navigate = useNavigate();
     const [notifications, setNotifications] = useState([]);
 
-    const navigate = useNavigate();
 
     const addNotification = (message, description, type) => {
         const id = Date.now();

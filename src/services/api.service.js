@@ -35,19 +35,20 @@ const deleteUserAPI = (id) => {
     return axios.delete(URL_BACKEND);
 }
 
-const handleUploadFile = (file, folder) => {
-    const URL_BACKEND = "/api/v1/file/upload";
+const handleUploadFile = (file) => {
+
+    const URL_BACKEND = "/files";
     let config = {
         headers: {
-            "upload-type": folder,
             "Content-Type": "multipart/form-data"
         }
     }
 
     const bodyFormData = new FormData();
-    bodyFormData.append("fileImg", file)
-    return axios.post(URL_BACKEND, bodyFormData, config)
+    bodyFormData.append("files", file); // key phải là 'file', đúng với @RequestParam("file")
+    return axios.post(URL_BACKEND, bodyFormData, config);
 }
+
 
 
 const updateUserAvatarApi = (avatar, _id, fullName, phone) => {
@@ -109,6 +110,11 @@ const fetchAllDish = (page, size, type) => {
     return axios.get(URL_BACKEND)
 }
 
+const fetchAllDishByName = (page, size, Name) => {
+
+    const url = `/dish?page=${page}&size=${size}&filter=name~'${Name}'`;
+    return axios.get(url);
+}
 
 const adDishInCart = (quantity, price, total, DishID) => {
     const URL_BACKEND = "/cart/add-dish";
@@ -123,6 +129,7 @@ const adDishInCart = (quantity, price, total, DishID) => {
     }
     return axios.post(URL_BACKEND, data)
 }
+
 
 const getCart = () => {
     const URL_BACKEND = "/cart";
@@ -143,9 +150,7 @@ const updateQuantity = (id, quantity) => {
     return axios.put(URL_BACKEND, data)
 }
 
-const deleteDish = (id) => {
-
-
+const deleteDishInCart = (id) => {
     const URL_BACKEND = `cart/delete-dish/${id}`;
     return axios.delete(URL_BACKEND)
 }
@@ -162,16 +167,90 @@ const checkOutCart = (receiverName, receiverPhone, receiverAddress, receiverEmai
 }
 
 
-const fetchAllOrder = () => {
+const fetchMyOrder = () => {
     const URL_BACKEND = "/orders/my";
     return axios.get(URL_BACKEND)
 }
 
+
+const fetchAllOrders = (page, size) => {
+
+    const URL_BACKEND = `/orders/all?page=${page}&size=${size}`;
+    return axios.get(URL_BACKEND)
+}
+
+const updateOrder = async (id, status) => {
+    // debugger
+    const URL_BACKEND = `/orders/status/${id}`;
+    const formData = new FormData();
+    formData.append("status", status);
+
+    let config = {
+        headers: {
+            "Content-Type": "form-data"
+        }
+    }
+
+
+    return axios.put(URL_BACKEND, formData, config);
+};
+
+
+const updateDish = async (dishData) => {
+    debugger
+    const URL_BACKEND = "/dish";
+    console.log("check id ", dishData.name)
+    const data = {
+        id: dishData.id,
+        name: dishData.name,
+        description: dishData.description,
+        price: dishData.price,
+        imageUrl: dishData.imageUrl,
+        category: {
+            id: dishData.categoryId
+        }
+
+    }
+    return axios.put(URL_BACKEND, data);
+};
+
+
+const deleteDish = (id) => {
+    const URL_BACKEND = `/dish/${id}`;
+    return axios.delete(URL_BACKEND)
+}
+
+const addDish = (dishData) => {
+    const URL_BACKEND = "/dish";
+    console.log("check id ", dishData.name)
+    const data = {
+        name: dishData.name,
+        description: dishData.description,
+        price: dishData.price,
+        imageUrl: dishData.image,
+        category: {
+            id: dishData.categoryId
+        }
+
+    }
+    return axios.put(URL_BACKEND, data);
+}
+
+const getImageUrl = async (fileName) => {
+    try {
+        const res = await axios.get(`http://localhost:8080/pre-signed-url/${fileName}`);
+        return res.data; // Trả về URL thực tế
+    } catch (error) {
+        console.error("Lỗi khi lấy URL ảnh:", error);
+        return ""; // Trả về chuỗi rỗng nếu lỗi
+    }
+};
 
 export {
     createUserApi, fetchAllUserAPI, updateUserApi,
     deleteUserAPI, handleUploadFile, updateUserAvatarApi,
     registerUserApi, loginApi, getAccountAPI, logoutAPI,
     fetchAllCategory, fetchAllDish, adDishInCart, getCart, getAllDishInCart,
-    updateQuantity, deleteDish, checkOutCart, fetchAllOrder
+    updateQuantity, deleteDishInCart, checkOutCart, fetchMyOrder, updateDish, deleteDish,
+    fetchAllDishByName, addDish, fetchAllOrders, updateOrder, getImageUrl
 } 
