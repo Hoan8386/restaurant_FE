@@ -92,24 +92,7 @@ nav {
 
 }
 
-.nav__page {
-    float: right;
 
-}
-
-.nav__listItem {
-    display: flex;
-    margin: 0;
-
-}
-
-.nav__menu {
-    display: none;
-}
-
-.nav__bar {
-    display: none;
-}
 
 
 .nav__item {
@@ -144,21 +127,7 @@ nav {
     color: var(--primary-color) !important;
 }
 
-.nav__item--active a {
-    color: var(--primary-color) !important;
-    transition: 0.3s;
-}
 
-.nav__item--active.button a {
-    color: var(--white-color) !important;
-    transition: 0.3s;
-}
-
-
-
-.nav__item--active a:hover {
-    color: var(--white-color);
-}
 
 li:hover {
     cursor: pointer;
@@ -209,13 +178,7 @@ body .name__brand {
     padding: 7rem 0;
 }
 
-.about__img {
-    width: 100%;
-    min-height: 520px;
-    background-position: center;
-    background-size: cover;
 
-}
 
 .heading__section {
     margin-bottom: 1.5rem;
@@ -239,20 +202,7 @@ body .heading__section .sub {
     color: #666666;
 }
 
-.about__phone a {
-    color: var(--primary-color) !important;
-    text-decoration: none;
-    font-size: 40px;
-    font-weight: 700;
-}
 
-.prameter__number {
-    color: var(--primary-color);
-    font-size: 44px;
-    font-weight: 700;
-    display: block;
-    line-height: 1;
-}
 
 .services .heading__section {
     align-items: center;
@@ -505,63 +455,7 @@ body .chef__position text {
 }
 
 
-.nav-fiexd-top {
-    height: 56px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    right: 0;
-    left: 0;
-    background-color: #fff;
-    color: #000;
-    margin: 0;
-    padding: 0;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
-    animation: showNav 0.5s linear;
-}
 
-@keyframes showNav {
-    0% {
-        transform: translateY(-100px);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateY(0px);
-        opacity: 1;
-    }
-}
-
-.shopping__cart i {
-    color: #fff;
-}
-
-.shopping__cart__icon i {
-    color: #fff;
-}
-
-
-.nav-fiexd-top .shopping__cart__icon i {
-    color: #000;
-}
-
-.nav-fiexd-top .shopping__cart i,
-.nav-fiexd-top .nav__brand,
-.nav-fiexd-top .nav__item a {
-    color: #000;
-}
-
-.nav-fiexd-top .button {
-    border-radius: 0px;
-}
-
-.nav-fiexd-top .button a {
-    color: #fff;
-}
-
-.nav-fiexd-top .nav__item:hover a {
-    color: #A0A09F;
-}
 
 
 /* about */
@@ -752,42 +646,3 @@ body .chef__position text {
 .icon_cart {
     background-color: var(--primary-color);
 }
-
-
-/* .ant-drawer-close {
-    color: #fff !important;
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 1000;
-}
-
-.drawer-cart-content {
-    backdrop-filter: blur(15px);
-    background-color: transparent !important;
-    transition: 0.5s;
-    overflow: hidden;
-} */
-
-/* Ghi đè animation mở Drawer */
-/* 
-.ant-drawer-content-wrapper {
-    background-color: transparent !important;
-    transition-duration: 0.5s !important;
-} */
-
-/* 
-.ant-modal-content {
-    padding: 0 !important;
-    overflow: hidden;
-    height: 582px;
-    border-radius: 16px !important;
-}
-
-.ant-modal-body {
-    height: 100% !important;
-}
-
-.ant-modal-body .row {
-    height: 100% !important;
-} */

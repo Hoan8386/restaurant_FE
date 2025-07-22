@@ -5,30 +5,28 @@ import { Button, Result } from "antd";
 
 const PrivateRoute = (props) => {
     const { user } = useContext(AuthContext);
-
-    if (user && user.id && user.role === "SUPER_ADMIN") {
-        console.log("check permission")
+    if (user && user.id) {
         return (
             <>
                 {props.children}
-            </>)
+            </>
+        )
     }
-    console.log("check permission 2")
-
-    // return (<Navigate to="/login" replace />);
 
     return (
         <Result
-            status="403"
+            status="404"
             title="Unauthorize!"
-            subTitle={"Bạn cần đăng nhập để truy cập nguồn tài nguyên này."}
+            subTitle={"Bạn cần đăng nhập để truy cập nguồn tài nguyên này"}
             extra={<Button type="primary">
                 <Link to="/">
-                    <span>Back to homepage</span>
+                    <span>
+                        Back Home
+                    </span>
                 </Link>
             </Button>}
         />
-    )
+    );
 
 }
 

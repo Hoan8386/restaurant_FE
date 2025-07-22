@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -22,6 +22,7 @@ const Navbar = () => {
     const [notifications, setNotifications] = useState([]);
     const [open, setOpen] = useState(false);
     const [listItemCart, setListItemCart] = useState([]);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const navigate = useNavigate(); // thêm
     const addNotification = (message, description, type) => {
         const id = Date.now();
@@ -43,6 +44,7 @@ const Navbar = () => {
                 avatar: "",
                 id: ""
             })
+            setCart([])
             message.success("Logout thành công.");
             addNotification("Logout success", "Đăng xuất thành công", "success");
             //redirect to home
@@ -114,6 +116,30 @@ const Navbar = () => {
             fetchCart();
         }
     }
+
+    const toggleDropdown = () => {
+        setDropdownOpen(!dropdownOpen);
+    }
+
+    const closeDropdown = () => {
+        setDropdownOpen(false);
+    }
+
+    // Đóng dropdown khi click bên ngoài
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            const dropdownEl = window.userDropdownRef;
+            if (dropdownOpen && dropdownEl && !dropdownEl.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [dropdownOpen]);
+
     return (
         <>
             {/* Top header */}
@@ -173,31 +199,81 @@ const Navbar = () => {
                                     }} >Book a table  </NavLink ></li>
                                     {
                                         user.id
-                                            ? <li>
-                                                <Dropdown className="text-white" menu={{ items }}
-                                                    overlayStyle={{
-                                                        width: "150px",
-                                                        top: "100px",
-                                                        textDecoration: "none",
-                                                        zIndex: "9999"
-                                                    }}>
-                                                    <a onClick={e => e.preventDefault()}
+                                            ? <li className="position-relative">
+                                                <div className="dropdown" ref={(ref) => (window.userDropdownRef = ref)}>
+                                                    <button
+                                                        className="dropdown-toggle"
+                                                        type="button"
+                                                        onClick={toggleDropdown}
+                                                        aria-expanded={dropdownOpen}
                                                         style={{
                                                             border: "1px solid white",
                                                             padding: "6px 12px",
                                                             borderRadius: "6px",
-                                                            // color: "white",
+                                                            color: "white",
                                                             display: "inline-block",
                                                             textDecoration: "none",
 
                                                         }}
                                                     >
-                                                        <Space>
-                                                            {user.username}
-                                                        </Space>
-                                                    </a>
-                                                </Dropdown>
+                                                        {user.fullName || user.username || 'User'}
+                                                    </button>
+                                                    <ul
+                                                        className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}
+                                                        style={{
+                                                            position: 'absolute',
+                                                            top: "50px",
+                                                            left: '0',
+                                                            zIndex: 1000,
+                                                            minWidth: '100%',
+                                                            backgroundColor: 'white',
+                                                            border: '1px solid #ccc',
+                                                            borderRadius: '4px',
+                                                            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                                                        }}
+                                                    >
+                                                        <li className="hover:bg-gray-200 hover:text-blue-600 transition-colors duration-200">
+                                                            <NavLink
+                                                                onClick={() => { closeDropdown(); }}
+                                                                to="/info"
+                                                                className="block px-4 py-1 text-gray-800 "
+                                                                style={{
+                                                                    textDecoration: "none",
+                                                                    color: "#C8A97E",
+
+                                                                }}
+                                                            >
+                                                                Info
+                                                            </NavLink>
+                                                        </li>
+                                                        <li className="hover:bg-gray-200 hover:text-blue-600 transition-colors duration-200">
+                                                            <NavLink
+                                                                onClick={() => { closeDropdown(); }}
+                                                                to="/order"
+                                                                className="block px-4 py-1 text-gray-800"
+                                                                style={{
+                                                                    textDecoration: "none",
+                                                                    color: "#C8A97E"
+                                                                }}
+                                                            >
+                                                                Order
+                                                            </NavLink>
+                                                        </li>
+                                                        <li
+                                                            onClick={() => {
+                                                                handleLogout();
+                                                                closeDropdown();
+                                                            }}
+
+                                                            className="hover:bg-red-100 hover:text-red-600 transition-colors duration-200 cursor-pointer px-4 py-1 text-red-500"
+                                                        >
+                                                            Logout
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
                                             </li>
+
                                             : <li className=" px-2 flex items-center justify-center "><NavLink className="nav_link text-white text-decoration-none px-2" to="/login">Login</NavLink ></li>
                                     }
 

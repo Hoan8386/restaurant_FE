@@ -31,9 +31,13 @@ import TableDish from './components/admin/dish/Table.dish';
 import OrderPage from './pages/client/order';
 import OrderPageAdmin from './pages/admin/order/OrderPage';
 import UserPageAdmin from './pages/admin/user/UserPage';
+import Unauthorized from './share/Unauthorized.page';
+import ProtectedRoute from './share/ProtectedRoute';
+import LayoutStaff from './components/staff/LayoutStaff';
 
 
 const LayoutClient = () => {
+
   const { isAppLoading } = useContext(AuthContext);
   return (
     <>
@@ -57,88 +61,71 @@ const LayoutClient = () => {
 }
 
 const App = () => {
-  const { user, setUser, isAppLoading, setIsAppLoading, setCart, cart } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  console.log(user)
+
   const router = createBrowserRouter([
     {
       path: "/",
-      element: (<LayoutApp><LayoutClient /></LayoutApp>),
+      element: (
+        <LayoutApp>
+          <LayoutClient />
+        </LayoutApp>
+      ),
       errorElement: <ErrorPage />,
       children: [
-        {
-          index: true,
-          element: <HomePage />
-        },
-        {
-          path: "/dish",
-          element: <DishPage />,
-        },
-        {
-          path: "/about",
-          element: <AboutPage />,
-        },
-        {
-          path: "/info",
-          element: <InfoPage />,
-        },
-        {
-          path: "/order",
-          element: <OrderPage />,
-        },
-      ]
-    }
-    // sử dụng children để những th con có thể kế thừa layout của thằng cha và dùng <Outlet/> trong thằng 
-    // cha để cho thằng con kế thừa 
-    ,
-
-    {
-      path: "/login",
-      element: <LoginPage />,
-    },
-    {
-      path: "/register",
-      element: <RegisterPage />,
-    },
-    {
-      path: "/confirm",
-      element: <ConfirmPage />,
+        { index: true, element: <HomePage /> },
+        { path: "/dish", element: <DishPage /> },
+        { path: "/about", element: <AboutPage /> },
+        { path: "/info", element: <PrivateRoute>  <InfoPage /></PrivateRoute> },
+        { path: "/order", element: <PrivateRoute> <OrderPage /> </PrivateRoute> },
+      ],
     },
 
     {
       path: "/admin",
-      element: (<LayoutApp>  <PrivateRoute> <LayoutAdmin></LayoutAdmin> </PrivateRoute> </LayoutApp>),
-      errorElement: <ErrorPage />,
+      element: (
+        <LayoutApp>
+          <ProtectedRoute allowedRoles={['SUPER_ADMIN']}>
+            <LayoutAdmin />
+          </ProtectedRoute>
+        </LayoutApp>
+      ),
       children: [
-        {
-          index: true,
-          element: <IndexPage />
-        },
-        {
-          path: "dish",
-          element: <TableDish />
-        },
-        {
-          path: "info",
-          element: <InfoPageAdmin />
-        }
-        , {
-          path: "order",
-          element: <OrderPageAdmin />
-        }
-        , {
-          path: "user",
-          element: <UserPageAdmin />
-        }
-      ]
-    }
+        { index: true, element: <IndexPage /> },
+        { path: "dish", element: <TableDish /> },
+        { path: "info", element: <InfoPageAdmin /> },
+        { path: "order", element: <OrderPageAdmin /> },
+        { path: "user", element: <UserPageAdmin /> },
+      ],
+    },
+
+
+    {
+      path: "/staff",
+      element: (
+        <LayoutApp>
+          <ProtectedRoute allowedRoles={['STAFF', 'SUPER_ADMIN']}>
+            <LayoutStaff />
+          </ProtectedRoute>
+        </LayoutApp>
+      ),
+      children: [
+        { index: true, element: <IndexPage /> },
+        { path: "info", element: <InfoPageAdmin /> },
+        { path: "order", element: <OrderPageAdmin /> },
+      ],
+    },
+
+
+    // Auth Pages
+    { path: "/login", element: <LoginPage /> },
+    { path: "/register", element: <RegisterPage /> },
+    { path: "/confirm", element: <ConfirmPage /> },
+    { path: "/unauthorized", element: <Unauthorized /> },
   ]);
 
+  return <RouterProvider router={router} />;
+};
 
-
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  )
-}
-
-export default App
+export default App;

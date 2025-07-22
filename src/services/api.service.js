@@ -179,6 +179,12 @@ const fetchAllOrders = (page, size) => {
     return axios.get(URL_BACKEND)
 }
 
+const fetchAllOrdersMy = (page, size) => {
+
+    const URL_BACKEND = `/orders/my?page=${page}&size=${size}`;
+    return axios.get(URL_BACKEND)
+}
+
 const updateOrder = async (id, status) => {
     // debugger
     const URL_BACKEND = `/orders/status/${id}`;
@@ -246,11 +252,23 @@ const getImageUrl = async (fileName) => {
     }
 };
 
+
+
+const fetchAllUser = (page, size) => {
+    const URL_BACKEND = `/users?page=${page}&size=${size}`;
+    return axios.get(URL_BACKEND)
+}
+
+const fetchAllOrderById = (page, size, id) => {
+    const url = `/orders/all?page=${page}&size=${size}?&filter=category.id~'${type}'`;
+    return axios.get(url);
+}
+
 export {
     createUserApi, fetchAllUserAPI, updateUserApi,
     deleteUserAPI, handleUploadFile, updateUserAvatarApi,
     registerUserApi, loginApi, getAccountAPI, logoutAPI,
     fetchAllCategory, fetchAllDish, adDishInCart, getCart, getAllDishInCart,
     updateQuantity, deleteDishInCart, checkOutCart, fetchMyOrder, updateDish, deleteDish,
-    fetchAllDishByName, addDish, fetchAllOrders, updateOrder, getImageUrl
+    fetchAllDishByName, addDish, fetchAllOrders, updateOrder, getImageUrl, fetchAllUser, fetchAllOrdersMy
 } 

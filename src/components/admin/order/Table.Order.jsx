@@ -169,6 +169,25 @@ const OrderTable = () => {
 
         fetchImageUrls();
     }, [selectedOrder]);
+
+    // search 
+    const handleSearch = async (e) => {
+        console.log(e.target.value);
+        const name = e.target.value;
+        // const res = await fetchAllDishByName(page, size, name);
+        // if (res.data && res.data.result) {
+        //     const dishesWithKey = res.data.result.map((item) => ({
+        //         ...item,
+        //         key: item.id.toString(),
+        //     }));
+        //     console.log(dishesWithKey);
+
+        //     setDishes(dishesWithKey);
+        //     setPage(res.data.meta.page);
+        //     setTotal(res.data.meta.total);
+        // }
+    }
+
     return (
         <>
             <div
@@ -188,7 +207,13 @@ const OrderTable = () => {
                         List Orders
                     </p>
                 </div>
-                <div>
+                <div className="flex items-center ">
+                    <span className="m-3 px-3 rounded text-white"
+                        style={{
+                            background: "#C8A97E",
+                        }}>
+                        Search by id
+                    </span>
                     <input
                         onChange={(e) => { handleSearch(e) }}
                         className="px-2 border rounded text-black bg-white"
@@ -199,7 +224,7 @@ const OrderTable = () => {
                         }}
 
                     />
-                    <button
+                    {/* <button
                         className="m-3 px-3 rounded text-white"
                         style={{
                             background: "#C8A97E",
@@ -209,7 +234,7 @@ const OrderTable = () => {
                         }}
                     >
                         add dish
-                    </button>
+                    </button> */}
                 </div>
             </div>
             <Table

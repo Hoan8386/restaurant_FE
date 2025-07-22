@@ -164,10 +164,10 @@ export const InfoPageAdmin = () => {
 
                         {/* Phone */}
                         <div className="mb-4 md:w-[calc(50%-12px)]">
-                            <label className="block mb-1 font-medium text-gray-800">Số điện thoại</label>
+                            <label className="block mb-1 font-medium text-gray-800">Vai trò</label>
                             <Input
                                 size="large"
-                                prefix={<PhoneOutlined className="text-gray-400" />}
+                                prefix={<LockOutlined className="text-gray-400" />}
                                 placeholder="Nhập số điện thoại"
                                 value={role}
                                 onChange={(e) => setPhone(e.target.value)

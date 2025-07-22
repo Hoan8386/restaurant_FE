@@ -3,7 +3,7 @@ import { Input, Button, Checkbox } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import bg from '../../assets/img/bg_3.jpg.webp';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { loginApi } from '../../services/api.service';
 import Notification from '../../components/noti/Notification';
 import { AuthContext } from '../../components/context/auth.context';
@@ -16,7 +16,7 @@ const LoginPage = () => {
     const [passwordError, setPasswordError] = useState('');
     const [remember, setRemember] = useState(true);
     const navigate = useNavigate();
-    const { setUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
 
     const [notifications, setNotifications] = useState([]);
     const addNotification = (message, description, type) => {
@@ -27,10 +27,12 @@ const LoginPage = () => {
 
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         let valid = true;
+
         if (!email) {
             setEmailError('Vui lòng nhập email!');
             valid = false;
@@ -45,22 +47,37 @@ const LoginPage = () => {
             setPasswordError('');
         }
 
-        if (valid) {
+        if (!valid) return;
 
-            // Gửi request đăng nhập ở đây
-
+        try {
             const res = await loginApi(email, password);
-            if (res.data) {
+            debugger
+            if (res?.data) {
+                const { access_token, user } = res.data;
 
+                localStorage.setItem("access_token", access_token);
+                setUser(user);
                 addNotification("Login success", "Đăng nhập thành công", "success");
-                localStorage.setItem("access_token", res.data.access_token)
-                setUser(res.data.user)
-                setTimeout(() => {
+
+                // ✅ Điều hướng theo role
+                const role = user.role.name;
+                if (role === "SUPER_ADMIN") {
+                    navigate("/admin");
+                } else if (role === "STAFF") {
+                    navigate("/staff");
+                } else {
                     navigate("/");
-                }, 2000);
-            } else if (res.statusCode === 400) {
-                addNotification("Error login user", "Thông tin đăng nhập không chính xác", "error");
-                return;
+                }
+
+            } else {
+                addNotification("Error login", "Không thể đăng nhập. Vui lòng thử lại.", "error");
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            if (error.response?.status === 400 || error.response?.status === 401) {
+                addNotification("Sai thông tin", "Email hoặc mật khẩu không đúng!", "error");
+            } else {
+                addNotification("Lỗi hệ thống", "Vui lòng thử lại sau!", "error");
             }
         }
     };

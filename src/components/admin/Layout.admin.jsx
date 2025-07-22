@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
     HomeOutlined,
     AppstoreOutlined,
@@ -9,11 +9,30 @@ import {
 } from '@ant-design/icons';
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-import { Dropdown, Space } from "antd";
+import { Button, Dropdown, Space } from "antd";
+import { logoutAPI } from "../../services/api.service";
 const LayoutAdmin = () => {
-    const { user } = useContext(AuthContext);
-
-
+    const { user, setUser, setCart } = useContext(AuthContext);
+    const navigate = useNavigate(); // thêm
+    const handleLogout = async () => {
+        const res = await logoutAPI();
+        if (res.data) {
+            //clear data
+            localStorage.removeItem("access_token");
+            setUser({
+                email: "",
+                phone: "",
+                fullName: "",
+                role: "",
+                avatar: "",
+                id: ""
+            })
+            setCart([])
+            // addNotification("Logout success", "Đăng xuất thành công", "success");
+            //redirect to home
+            navigate("/");
+        }
+    }
 
     return (
         <div className="w-full flex min-h-screen" style={{ background: "#f6f6f8" }}>
@@ -68,11 +87,11 @@ const LayoutAdmin = () => {
                 <div className="mt-auto py-1 px-3" style={{
                     backgroundColor: "#C8A97E"
                 }}>
-                    <Link className="text-red-600 hover:text-red-800 block items-center gap-2 text-decoration-none " style={{
+                    <Link onClick={() => { handleLogout() }} className="text-red-600 hover:text-red-800 block items-center gap-2 text-decoration-none " style={{
                         color: "#fff",
                         fontSize: "20px",
 
-                    }} to="/logout">
+                    }} to="/logout" >
                         <LogoutOutlined style={{ marginRight: "16px" }} />
                         <span className="material-icons">logout</span>
                     </Link>
