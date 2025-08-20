@@ -34,6 +34,7 @@ import UserPageAdmin from './pages/admin/user/UserPage';
 import Unauthorized from './share/Unauthorized.page';
 import ProtectedRoute from './share/ProtectedRoute';
 import LayoutStaff from './components/staff/LayoutStaff';
+import ThanksPage from './pages/client/thanks';
 
 
 const LayoutClient = () => {
@@ -79,6 +80,7 @@ const App = () => {
         { path: "/about", element: <AboutPage /> },
         { path: "/info", element: <PrivateRoute>  <InfoPage /></PrivateRoute> },
         { path: "/order", element: <PrivateRoute> <OrderPage /> </PrivateRoute> },
+
       ],
     },
 
@@ -117,6 +119,7 @@ const App = () => {
       ],
     },
 
+    { path: "/thanks", element: <ThanksPage /> },
 
     // Auth Pages
     { path: "/login", element: <LoginPage /> },

@@ -35,18 +35,19 @@ const TableDish = () => {
         try {
             const res = await fetchAllDish(page, size, type);
             if (res.data && res.data.result) {
-                const enrichedDishes = await Promise.all(
-                    res.data.result.map(async (item) => {
-                        const imageUrl = await getImageUrl(item.imageUrl); // gọi API từ file service
-                        return {
-                            ...item,
-                            key: item.id.toString(),
-                            imageUrl,
-                        };
-                    })
-                );
+                debugger
+                // const enrichedDishes = await Promise.all(
+                //     res.data.result.map(async (item) => {
+                //         const imageUrl = await getImageUrl(item.imageUrl); // gọi API từ file service
+                //         return {
+                //             ...item,
+                //             key: item.id.toString(),
+                //             imageUrl,
+                //         };
+                //     })
+                // );
 
-                setDishes(enrichedDishes);
+                setDishes(res.data.result);
                 setPage(res.data.meta.page);
                 setTotal(res.data.meta.total);
             }
@@ -143,7 +144,7 @@ const TableDish = () => {
             console.log("Lỗi upload ảnh:", uploadResponse);
 
             const fileName = uploadResponse.data;
-
+            const imageUrl = await getImageUrl(fileName);
             form.setFieldsValue({ image: fileName });
             // Bước 2: Lấy dữ liệu từ form và cập nhật món ăn
             const formValues = form.getFieldsValue();
@@ -152,7 +153,7 @@ const TableDish = () => {
                 name: formValues.name,
                 description: formValues.description,
                 price: formValues.price,
-                imageUrl: fileName, // Sử dụng fileName từ API upload
+                imageUrl: imageUrl, // Sử dụng fileName từ API upload
                 categoryId: formValues.categoryId,
             };
 

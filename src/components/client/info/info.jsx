@@ -8,7 +8,7 @@ import bg1 from '../../../assets/img/bg_1.jpg.webp';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/auth.context';
 import Notification from '../../noti/Notification';
-import { handleUploadFile } from '../../../services/api.service';
+import { handleUploadFile, updateUserApi } from '../../../services/api.service';
 
 const { Option } = Select;
 
@@ -83,6 +83,7 @@ export const InfoPage = () => {
     };
 
     const handleSubmit = async () => {
+        debugger
         const res = await updateUserApi(user.id, userName, gender, phone, address, avatarUrl);
         if (res.data) {
             addNotification("Cập nhật thành công", "Thông tin người dùng đã được cập nhật", "success");

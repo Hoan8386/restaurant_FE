@@ -56,6 +56,7 @@ export const InfoPageAdmin = () => {
         reader.readAsDataURL(file);
     };
     const handleSubmit = async () => {
+        debugger
         const res = await updateUserApi(user.id, userName, gender, phone, address);
         if (res.data) {
             addNotification("Update success", "Cập nhật thông tin thành công", "success");

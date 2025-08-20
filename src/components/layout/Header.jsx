@@ -339,7 +339,7 @@ const Navbar = () => {
                             <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'space-between' }}>
                                 <img
                                     className="shopping__item__img"
-                                    src={food1}
+                                    src={item.imageUrl}
                                     alt={item.name}
                                     style={{ width: '80px', height: '60px', borderRadius: '6px' }}
                                 />

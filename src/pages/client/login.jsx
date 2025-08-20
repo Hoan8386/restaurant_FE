@@ -82,6 +82,9 @@ const LoginPage = () => {
         }
     };
 
+    const handleClickLoginGoogle = () => {
+
+    }
     return (
         <div
             className="w-screen h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
@@ -162,6 +165,11 @@ const LoginPage = () => {
                             </Link>
                         </p>
                     </div>
+
+                    <a href="http://localhost:8080/oauth2/authorization/google">Login with Google</a>
+                    <Button onClick={handleClickLoginGoogle}>
+                        Login with google
+                    </Button>
                 </div>
 
                 {/* Cột phải giữ nguyên */}

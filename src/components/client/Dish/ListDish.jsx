@@ -29,24 +29,7 @@ export const ListDish = ({ dishes, total, setPage, page }) => {
         return res;
     };
 
-    // Khi dishes thay đổi, lấy URL ảnh đầy đủ cho từng món
-    useEffect(() => {
-        async function fetchImageUrls() {
-            if (!dishes || dishes.length === 0) {
-                setDishesWithImage([]);
-                return;
-            }
-            const enriched = await Promise.all(
-                dishes.map(async (item) => {
-                    const fullImageUrl = await getImageUrl(item.imageUrl);
-                    return { ...item, fullImageUrl };
-                })
-            );
-            setDishesWithImage(enriched);
-        }
 
-        fetchImageUrls();
-    }, [dishes]);
 
     // Khi chọn món, đặt số lượng = 1 và tổng tiền = giá món
     useEffect(() => {
@@ -88,7 +71,7 @@ export const ListDish = ({ dishes, total, setPage, page }) => {
         }
     };
 
-    const rows = chunkArray(dishesWithImage, 2);
+    const rows = chunkArray(dishes, 2);
 
     // Component con hiển thị nội dung món ăn
     const DishContent = ({ dish, onClick }) => (
@@ -126,7 +109,7 @@ export const ListDish = ({ dishes, total, setPage, page }) => {
                                                 <div
                                                     className="dish__img"
                                                     style={{
-                                                        backgroundImage: `url(${dish.fullImageUrl || ''})`,
+                                                        backgroundImage: `url(${dish.imageUrl || ''})`,
                                                     }}
                                                 ></div>
                                             </div>
@@ -143,7 +126,7 @@ export const ListDish = ({ dishes, total, setPage, page }) => {
                                                 <div
                                                     className="dish__img"
                                                     style={{
-                                                        backgroundImage: `url(${dish.fullImageUrl || ''})`,
+                                                        backgroundImage: `url(${dish.imageUrl || ''})`,
                                                     }}
                                                 ></div>
                                             </div>
@@ -180,7 +163,7 @@ export const ListDish = ({ dishes, total, setPage, page }) => {
                         <div
                             className="modal__img"
                             style={{
-                                backgroundImage: `url(${selectedDish?.fullImageUrl || ''})`,
+                                backgroundImage: `url(${selectedDish?.imageUrl || ''})`,
                                 width: '100%',
                                 height: '100%',
                                 backgroundSize: 'cover',

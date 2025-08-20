@@ -94,7 +94,8 @@ const getAccountAPI = () => {
 }
 
 const logoutAPI = () => {
-    const URL_BACKEND = "/api/v1/auth/logout";
+    // const URL_BACKEND = "/api/v1/auth/logout";
+    const URL_BACKEND = "/logout";
     return axios.post(URL_BACKEND);
 }
 
@@ -155,13 +156,14 @@ const deleteDishInCart = (id) => {
     return axios.delete(URL_BACKEND)
 }
 
-const checkOutCart = (receiverName, receiverPhone, receiverAddress, receiverEmail) => {
+const checkOutCart = (receiverName, receiverPhone, receiverAddress, receiverEmail, paymentMethod) => {
     const URL_BACKEND = "/cart/checkout";
     const data = {
         receiverName: receiverName,
         receiverPhone: receiverPhone,
         receiverAddress: receiverAddress,
-        receiverEmail: receiverEmail
+        receiverEmail: receiverEmail,
+        paymentMethod: paymentMethod
     }
     return axios.post(URL_BACKEND, data)
 }
@@ -264,11 +266,24 @@ const fetchAllOrderById = (page, size, id) => {
     return axios.get(url);
 }
 
+const loginWithGoogle = (apiGoogle) => {
+    return axios.post(apiGoogle);
+}
+
+const paymentCallback = (vnp_ResponseCode, vnp_TxnRef) => {
+    const URL_BACKEND = "/cart/call-back-vnpay";
+    const data = {
+        vnp_ResponseCode,
+        vnp_TxnRef
+    };
+    return axios.post(URL_BACKEND, data);
+};
 export {
     createUserApi, fetchAllUserAPI, updateUserApi,
     deleteUserAPI, handleUploadFile, updateUserAvatarApi,
     registerUserApi, loginApi, getAccountAPI, logoutAPI,
     fetchAllCategory, fetchAllDish, adDishInCart, getCart, getAllDishInCart,
     updateQuantity, deleteDishInCart, checkOutCart, fetchMyOrder, updateDish, deleteDish,
-    fetchAllDishByName, addDish, fetchAllOrders, updateOrder, getImageUrl, fetchAllUser, fetchAllOrdersMy
+    fetchAllDishByName, addDish, fetchAllOrders, updateOrder, getImageUrl, fetchAllUser, fetchAllOrdersMy,
+    loginWithGoogle, paymentCallback
 } 
