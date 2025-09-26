@@ -155,13 +155,14 @@ const deleteDishInCart = (id) => {
     return axios.delete(URL_BACKEND)
 }
 
-const checkOutCart = (receiverName, receiverPhone, receiverAddress, receiverEmail) => {
+const checkOutCart = (receiverName, receiverPhone, receiverAddress, receiverEmail ,paymentMethod) => {
     const URL_BACKEND = "/cart/checkout";
     const data = {
         receiverName: receiverName,
         receiverPhone: receiverPhone,
         receiverAddress: receiverAddress,
-        receiverEmail: receiverEmail
+        receiverEmail: receiverEmail,
+        paymentMethod:paymentMethod
     }
     return axios.post(URL_BACKEND, data)
 }
@@ -239,7 +240,7 @@ const addDish = (dishData) => {
         }
 
     }
-    return axios.put(URL_BACKEND, data);
+    return axios.post(URL_BACKEND, data);
 }
 
 const getImageUrl = async (fileName) => {
@@ -264,11 +265,74 @@ const fetchAllOrderById = (page, size, id) => {
     return axios.get(url);
 }
 
+
+const fetchBestSeller = () => {
+    const URL_BACKEND = "/dish/bestSeller";
+    return axios.get(URL_BACKEND)
+}
+
+const fetchDishAlsoBought = (id) => {
+    const URL_BACKEND = `/dish/alsoBought/${id}`;
+    return axios.get(URL_BACKEND)
+}
+
+const fetchCollaborative = () => {
+    const URL_BACKEND = "/dish/collaborative";
+    return axios.get(URL_BACKEND)
+}
+
+
+// ======= Dashboard API =======
+
+// 1. Lấy tổng quan dashboard
+const fetchDashboardSummary = () => {
+    const URL_BACKEND = "/neo4j/dashboard/summary";
+    return axios.get(URL_BACKEND);
+}
+
+// 2. Thống kê số lượng order theo tháng
+const fetchOrdersByMonth = () => {
+    const URL_BACKEND = "/neo4j/dashboard/orders/monthly";
+    return axios.get(URL_BACKEND);
+}
+
+// 3. Top khách hàng đặt nhiều đơn nhất
+const fetchTopCustomers = () => {
+    const URL_BACKEND = "/neo4j/dashboard/customers/top";
+    return axios.get(URL_BACKEND);
+}
+
+// 4. Lấy các combo món
+const fetchFrequentProductPairs = (comboSize = 3, limit = 10) => {
+    const URL_BACKEND = `/neo4j/dashboard/products/frequent-pairs?comboSize=${comboSize}&limit=${limit}`;
+    return axios.get(URL_BACKEND);
+}
+
+// 5. Chuỗi mua hàng (purchase sequence)
+const fetchPurchaseSequences = () => {
+    const URL_BACKEND = "/neo4j/dashboard/patterns/sequence";
+    return axios.get(URL_BACKEND);
+}
+
+// 6. Doanh thu theo Category
+const fetchSalesByCategory = () => {
+    const URL_BACKEND = "/neo4j/dashboard/categories/sales";
+    return axios.get(URL_BACKEND);
+}
+
+
 export {
     createUserApi, fetchAllUserAPI, updateUserApi,
     deleteUserAPI, handleUploadFile, updateUserAvatarApi,
     registerUserApi, loginApi, getAccountAPI, logoutAPI,
     fetchAllCategory, fetchAllDish, adDishInCart, getCart, getAllDishInCart,
     updateQuantity, deleteDishInCart, checkOutCart, fetchMyOrder, updateDish, deleteDish,
-    fetchAllDishByName, addDish, fetchAllOrders, updateOrder, getImageUrl, fetchAllUser, fetchAllOrdersMy
+    fetchAllDishByName, addDish, fetchAllOrders, updateOrder, getImageUrl, fetchAllUser,
+    fetchAllOrdersMy , fetchBestSeller,fetchDishAlsoBought,fetchCollaborative,
+     fetchDashboardSummary,
+    fetchOrdersByMonth,
+    fetchTopCustomers,
+    fetchFrequentProductPairs,
+    fetchPurchaseSequences,
+    fetchSalesByCategory
 } 
