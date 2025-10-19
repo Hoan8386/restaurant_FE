@@ -8,10 +8,16 @@ import DashboardCards from "./DashboardCards";
 import SalesByCategoryChart from "./SalesByCategoryChart";
 import TopCustomers from "./TopCustomers";
 import FrequentCombos from "./FrequentCombos";
+import MonthlyRevenueChart from "./MonthlyRevenueChart";
+import TopDishPerMonthChart from "./TopDishPerMonthChart";
+import HotDishesCard from "./HotDishesCard";
+import PredictedHotDishesCard from "./PredictedHotDishesCard";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
+  PointElement,
+  LineElement,
   BarElement,
   Title,
   Tooltip,
@@ -22,6 +28,8 @@ import {
 ChartJS.register(
   CategoryScale,
   LinearScale,
+  PointElement,
+  LineElement,
   BarElement,
   Title,
   Tooltip,
@@ -103,17 +111,36 @@ const IndexPage = () => {
   }, []);
 
   return (
-    <div
-      className="w-full p-3 "
-      style={{
-        height: "100vh",
-        overflowX: "scroll",
-      }}
-    >
+    <div className="w-full space-y-6">
       <DashboardCards summary={summary} />
-      <SalesByCategoryChart chartData={categoryChartData} />
-      <TopCustomers customers={topCustomers} />
-      <FrequentCombos />
+
+      <div className="w-full" style={{ marginTop: "2rem" }}>
+        <SalesByCategoryChart chartData={categoryChartData} />
+      </div>
+
+      <div className="w-full" style={{ marginTop: "2rem" }}>
+        <TopCustomers customers={topCustomers} />
+      </div>
+
+      <div className="w-full" style={{ marginTop: "2rem" }}>
+        <FrequentCombos />
+      </div>
+
+      <div className="w-full" style={{ marginTop: "2rem" }}>
+        <MonthlyRevenueChart />
+      </div>
+
+      <div className="w-full" style={{ marginTop: "2rem" }}>
+        <TopDishPerMonthChart />
+      </div>
+
+      <div className="w-full" style={{ marginTop: "2rem" }}>
+        <HotDishesCard />
+      </div>
+
+      <div className="w-full" style={{ marginTop: "2rem" }}>
+        <PredictedHotDishesCard />
+      </div>
     </div>
   );
 };

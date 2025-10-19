@@ -320,6 +320,30 @@ const fetchSalesByCategory = () => {
     return axios.get(URL_BACKEND);
 }
 
+// 7. Doanh thu theo tháng
+const fetchMonthlyRevenue = () => {
+    const URL_BACKEND = "/neo4j/dashboard/revenue/monthly";
+    return axios.get(URL_BACKEND);
+}
+
+// 8. Top món bán chạy nhất theo tháng
+const fetchTopSellingDishPerMonth = () => {
+    const URL_BACKEND = "/neo4j/dashboard/top-dish/monthly";
+    return axios.get(URL_BACKEND);
+}
+
+// 9. Món hot - tăng trưởng cao nhất trong tháng hiện tại
+const fetchHotDishes = () => {
+    const URL_BACKEND = "/neo4j/dashboard/dishes/hot";
+    return axios.get(URL_BACKEND);
+}
+
+// 10. Dự đoán món hot tháng này
+const fetchPredictedHotDishes = () => {
+    const URL_BACKEND = "/neo4j/dashboard/dishes/predicted-hot-this-month";
+    return axios.get(URL_BACKEND);
+}
+
 
 export {
     createUserApi, fetchAllUserAPI, updateUserApi,
@@ -334,5 +358,9 @@ export {
     fetchTopCustomers,
     fetchFrequentProductPairs,
     fetchPurchaseSequences,
-    fetchSalesByCategory
+    fetchSalesByCategory,
+    fetchMonthlyRevenue,
+    fetchTopSellingDishPerMonth,
+    fetchHotDishes,
+    fetchPredictedHotDishes
 } 

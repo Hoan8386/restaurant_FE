@@ -1,119 +1,156 @@
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
-    HomeOutlined,
-    AppstoreOutlined,
-    ShoppingCartOutlined,
-    TeamOutlined,
-    BarChartOutlined,
-    LogoutOutlined
-} from '@ant-design/icons';
+  HomeOutlined,
+  AppstoreOutlined,
+  ShoppingCartOutlined,
+  TeamOutlined,
+  BarChartOutlined,
+  LogoutOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-import { Button, Dropdown, Space } from "antd";
+import { Button, Dropdown, Space, Avatar } from "antd";
 import { logoutAPI } from "../../services/api.service";
+import "../../style/admin/admin.css";
 const LayoutAdmin = () => {
-    const { user, setUser, setCart } = useContext(AuthContext);
-    const navigate = useNavigate(); // thêm
-    const handleLogout = async () => {
-        const res = await logoutAPI();
-        if (res.data) {
-            //clear data
-            localStorage.removeItem("access_token");
-            setUser({
-                email: "",
-                phone: "",
-                fullName: "",
-                role: "",
-                avatar: "",
-                id: ""
-            })
-            setCart([])
-            // addNotification("Logout success", "Đăng xuất thành công", "success");
-            //redirect to home
-            navigate("/");
-        }
+  const { user, setUser, setCart } = useContext(AuthContext);
+  const navigate = useNavigate(); // thêm
+  const handleLogout = async () => {
+    const res = await logoutAPI();
+    if (res.data) {
+      //clear data
+      localStorage.removeItem("access_token");
+      setUser({
+        email: "",
+        phone: "",
+        fullName: "",
+        role: "",
+        avatar: "",
+        id: "",
+      });
+      setCart([]);
+      // addNotification("Logout success", "Đăng xuất thành công", "success");
+      //redirect to home
+      navigate("/");
     }
+  };
 
-    return (
-        <div className="w-full flex min-h-screen" style={{ background: "#f6f6f8" }}>
-            <div className="side-bar w-[15%] p-3 bg-white h-screen flex flex-col">
-                {/* Logo */}
-                <div
-                    className="mb-6"
-                    style={{
-                        fontFamily: 'Great Vibes, cursive',
-                        fontSize: '40px',
-                        color: '#C8A97E',
-                    }}
-                >
-                    Feliciano
-                </div>
+  return (
+    <div className="w-full flex min-h-screen">
+      {/* Sidebar */}
+      <div className="side-bar w-[15%] h-screen flex flex-col">
+        {/* Logo */}
+        <div className="logo">Feliciano</div>
 
-                {/* Menu */}
-                <ul className="list_menu p-0 flex-1">
-                    <li className="list_menu_item">
-                        <Link className="item-link flex items-center gap-2" to="/admin">
-                            <HomeOutlined style={{ marginRight: "16px" }} />
-                            Home
-                        </Link>
-                    </li>
-                    <li className="list_menu_item">
-                        <Link className="item-link flex items-center gap-2" to="/admin/dish">
-                            <AppstoreOutlined style={{ marginRight: "16px" }} />
-                            Dishes
-                        </Link>
-                    </li>
-                    <li className="list_menu_item">
-                        <Link className="item-link flex items-center gap-2" to="/admin/order">
-                            <ShoppingCartOutlined style={{ marginRight: "16px" }} />
-                            Orders
-                        </Link>
-                    </li>
-                    <li className="list_menu_item">
-                        <Link className="item-link flex items-center gap-2" to="/admin/user">
-                            <TeamOutlined style={{ marginRight: "16px" }} />
-                            User
-                        </Link>
-                    </li>
-                    <li className="list_menu_item">
-                        <Link className="item-link flex items-center gap-2" to="/analysis">
-                            <BarChartOutlined style={{ marginRight: "16px" }} />
-                            Analysis
-                        </Link>
-                    </li>
-                </ul>
+        {/* Menu */}
+        <ul className="list_menu flex-1">
+          <li className="list_menu_item">
+            <NavLink
+              className={({ isActive }) =>
+                `item-link ${isActive ? "active" : ""}`
+              }
+              to="/admin"
+            >
+              <HomeOutlined />
+              <span>Dashboard</span>
+            </NavLink>
+          </li>
+          <li className="list_menu_item">
+            <NavLink
+              className={({ isActive }) =>
+                `item-link ${isActive ? "active" : ""}`
+              }
+              to="/admin/dish"
+            >
+              <AppstoreOutlined />
+              <span>Dishes</span>
+            </NavLink>
+          </li>
+          <li className="list_menu_item">
+            <NavLink
+              className={({ isActive }) =>
+                `item-link ${isActive ? "active" : ""}`
+              }
+              to="/admin/order"
+            >
+              <ShoppingCartOutlined />
+              <span>Orders</span>
+            </NavLink>
+          </li>
+          <li className="list_menu_item">
+            <NavLink
+              className={({ isActive }) =>
+                `item-link ${isActive ? "active" : ""}`
+              }
+              to="/admin/user"
+            >
+              <TeamOutlined />
+              <span>Users</span>
+            </NavLink>
+          </li>
+          <li className="list_menu_item">
+            <NavLink
+              className={({ isActive }) =>
+                `item-link ${isActive ? "active" : ""}`
+              }
+              to="/analysis"
+            >
+              <BarChartOutlined />
+              <span>Analytics</span>
+            </NavLink>
+          </li>
+        </ul>
 
-                {/* Logout */}
-                <div className="mt-auto py-1 px-3" style={{
-                    backgroundColor: "#C8A97E"
-                }}>
-                    <Link onClick={() => { handleLogout() }} className="text-red-600 hover:text-red-800 block items-center gap-2 text-decoration-none " style={{
-                        color: "#fff",
-                        fontSize: "20px",
+        {/* Logout Button */}
+        <div className="logout-btn-container">
+          <Link
+            onClick={() => {
+              handleLogout();
+            }}
+            className="logout-link"
+            to="/logout"
+          >
+            <LogoutOutlined />
+            <span>Logout</span>
+          </Link>
+        </div>
+      </div>
 
-                    }} to="/logout" >
-                        <LogoutOutlined style={{ marginRight: "16px" }} />
-                        <span className="material-icons">logout</span>
-                    </Link>
-                </div>
+      {/* Main Content */}
+      <div className="w-[85%] flex flex-col bg-gray-50 h-[100vh] overflow-y-scroll">
+        {/* Header */}
+        <header
+          className="bg-white py-2 px-6 shadow-sm border-b border-gray-200 flex justify-between items-center"
+          style={{
+            padding: "0 30px",
+          }}
+        >
+          <h1 className="text-xl font-bold text-gray-800">Admin Dashboard</h1>
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <p className="text-sm font-semibold text-gray-700 m-0">
+                {user.username}
+              </p>
+              <p className="text-xs text-gray-500 m-0">{user.email}</p>
             </div>
+            <Link to={"/admin/info"}>
+              <Avatar
+                icon={<UserOutlined />}
+                style={{ backgroundColor: "#C8A97E", cursor: "pointer" }}
+                size={40}
+              />
+            </Link>
+          </div>
+        </header>
 
-            <div className="side-bar w-[85%]   ">
-                <header className="bg-white py-3 px-5">
-                    <p className="text-right m-0">
-                        <Link to={"/admin/info"} className="text-decoration-none">
-                            {user.username}
-                        </Link>
-                    </p>
-
-                </header>
-
-                <div className="p-3">
-                    <Outlet />
-                </div>
-            </div>
-        </div >
-    )
-}
+        {/* Content Area */}
+        <div className="admin-main-content flex-1 overflow-y-scroll">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default LayoutAdmin;
