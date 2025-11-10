@@ -18,6 +18,7 @@ import {
   getCart,
   logoutAPI,
   updateQuantity,
+  getImageUrl,
 } from "../../services/api.service";
 import Notification from "../noti/Notification";
 import food1 from "../../assets/img/food-1.webp";
@@ -90,8 +91,15 @@ const Navbar = () => {
   const fetchCart = async () => {
     const res = await getAllDishInCart();
     if (res.data) {
-      setListItemCart(res.data);
-      console.log(res.data);
+      // Enrich với fullImageUrl
+      const enriched = await Promise.all(
+        res.data.map(async (item) => {
+          const fullImageUrl = await getImageUrl(item.imageUrl);
+          return { ...item, fullImageUrl };
+        })
+      );
+      setListItemCart(enriched);
+      console.log(enriched);
     } else {
       setListItemCart([]);
     }
@@ -102,8 +110,15 @@ const Navbar = () => {
   const openCart = async () => {
     const res = await getAllDishInCart();
     if (res.data) {
-      setListItemCart(res.data);
-      console.log(res.data);
+      // Enrich với fullImageUrl
+      const enriched = await Promise.all(
+        res.data.map(async (item) => {
+          const fullImageUrl = await getImageUrl(item.imageUrl);
+          return { ...item, fullImageUrl };
+        })
+      );
+      setListItemCart(enriched);
+      console.log(enriched);
     } else {
       setListItemCart([]);
     }
@@ -399,7 +414,7 @@ const Navbar = () => {
               >
                 <img
                   className="shopping__item__img"
-                  src={food1}
+                  src={item.fullImageUrl || food1}
                   alt={item.name}
                   style={{ width: "80px", height: "60px", borderRadius: "6px" }}
                 />

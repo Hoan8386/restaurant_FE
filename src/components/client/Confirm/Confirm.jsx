@@ -7,6 +7,7 @@ import {
   checkOutCart,
   getAllDishInCart,
   getCart,
+  getImageUrl,
 } from "../../../services/api.service";
 import Notification from "../../noti/Notification";
 import { useNavigate } from "react-router-dom";
@@ -57,8 +58,15 @@ const ConfirmPage = () => {
   const fetchCart = async () => {
     const res = await getAllDishInCart();
     if (res.data) {
-      setListItemCart(res.data);
-      console.log(res.data);
+      // Enrich với fullImageUrl
+      const enriched = await Promise.all(
+        res.data.map(async (item) => {
+          const fullImageUrl = await getImageUrl(item.imageUrl);
+          return { ...item, fullImageUrl };
+        })
+      );
+      setListItemCart(enriched);
+      console.log(enriched);
     } else {
       setListItemCart([]);
     }
@@ -202,8 +210,8 @@ const ConfirmPage = () => {
                   <div className="flex justify-between items-start">
                     {/* Hình ảnh món ăn */}
                     <img
-                      src={`${food1}`}
-                      alt="Grilled Beef with potatoes"
+                      src={item.fullImageUrl || food1}
+                      alt={item.name}
                       className="w-20 h-15 rounded"
                     />
 
