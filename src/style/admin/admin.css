@@ -57,8 +57,15 @@
 }
 
 .item-link.active:hover {
-  background: linear-gradient(90deg, rgba(200, 169, 126, 0.25) 0%, rgba(200, 169, 126, 0.1) 100%);
-  color: #d4b896;
+  background: linear-gradient(90deg, rgba(200, 169, 126, 0.35) 0%, rgba(200, 169, 126, 0.15) 100%);
+  color: #ffffff;
+  border-left: 3px solid #d4b896;
+  padding-left: calc(1.5rem - 3px);
+}
+
+.item-link.active:hover span,
+.item-link.active:hover svg {
+  color: #ffffff !important;
 }
 
 .item-link svg {

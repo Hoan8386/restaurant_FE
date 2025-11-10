@@ -51,9 +51,10 @@ const LayoutAdmin = () => {
                 `item-link ${isActive ? "active" : ""}`
               }
               to="/admin"
+              end
             >
               <HomeOutlined />
-              <span>Dashboard</span>
+              <span className="px-2">Dashboard</span>
             </NavLink>
           </li>
           <li className="list_menu_item">
@@ -64,7 +65,7 @@ const LayoutAdmin = () => {
               to="/admin/dish"
             >
               <AppstoreOutlined />
-              <span>Dishes</span>
+              <span className="px-2">Dishes</span>
             </NavLink>
           </li>
           <li className="list_menu_item">
@@ -75,7 +76,7 @@ const LayoutAdmin = () => {
               to="/admin/order"
             >
               <ShoppingCartOutlined />
-              <span>Orders</span>
+              <span className="px-2">Orders</span>
             </NavLink>
           </li>
           <li className="list_menu_item">
@@ -86,18 +87,7 @@ const LayoutAdmin = () => {
               to="/admin/user"
             >
               <TeamOutlined />
-              <span>Users</span>
-            </NavLink>
-          </li>
-          <li className="list_menu_item">
-            <NavLink
-              className={({ isActive }) =>
-                `item-link ${isActive ? "active" : ""}`
-              }
-              to="/analysis"
-            >
-              <BarChartOutlined />
-              <span>Analytics</span>
+              <span className="px-2">Users</span>
             </NavLink>
           </li>
         </ul>
